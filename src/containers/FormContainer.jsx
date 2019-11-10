@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 /* Import Components */
-import CheckBox from '../components/CheckBox';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
 import Select from '../components/Select';
@@ -33,13 +32,6 @@ class FormContainer extends Component {
     this.handleGenderChange = this.handleGenderChange.bind(this);
   }
 
-  //   User the below PATCH API for partial save
-  // a. form1 - http://www.mocky.io/v2/5d02885a3100005a00ab3048
-  // b. form2 - http://www.mocky.io/v2/5d0288823100005a00ab3049
-  // c. form3 - http://www.mocky.io/v2/5d0288b43100003400ab304a
-
-  /* This lifecycle hook gets executed when the component mounts */
-
   handleGenderChange = e => {
     let value = e.target.value;
     this.setState(
@@ -64,6 +56,7 @@ class FormContainer extends Component {
         });
       });
     });
+
     fetch('http://www.mocky.io/v2/5d0099b53200000f00f9d5c5', {
       method: 'GET',
       headers: {
@@ -133,6 +126,7 @@ class FormContainer extends Component {
 
   saveForm3 = () => {
     let userData = {};
+    userData.hobbie = this.state.newUser.hobbie;
     userData.email = this.state.newUser.email;
     fetch('http://www.mocky.io/v2/5d0288b43100003400ab304a', {
       method: 'PUT',
@@ -216,30 +210,30 @@ class FormContainer extends Component {
     e.preventDefault();
     let userData = this.state.newUser;
 
-    // if (
-    //   this.state.newUser.name === '' ||
-    //   this.state.newUser.email === '' ||
-    //   this.state.newUser.age === '' ||
-    //   this.state.newUser.gender === '' ||
-    //   this.state.newUser.hobbie === '' ||
-    //   this.state.newUser.address === ''
-    // ) {
-    //   alert('all fields are mandatory');
-    //   return false;
-    // } else {
-    //   fetch('http://www.mocky.io/v2/5d0288e43100004f4aab304b', {
-    //     method: 'POST',
-    //     body: JSON.stringify(userData),
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }).then(response => {
-    //     response.json().then(data => {
-    //       console.log('Successful' + data);
-    //     });
-    //   });
-    // }
+    if (
+      this.state.newUser.name === '' ||
+      this.state.newUser.email === '' ||
+      this.state.newUser.age === '' ||
+      this.state.newUser.gender === '' ||
+      this.state.newUser.hobbie === '' ||
+      this.state.newUser.address === ''
+    ) {
+      alert('all fields are mandatory');
+      return false;
+    } else {
+      fetch('http://www.mocky.io/v2/5d0288e43100004f4aab304b', {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        response.json().then(data => {
+          console.log('Successful' + data);
+        });
+      });
+    }
   }
 
   handleClearForm(e) {
