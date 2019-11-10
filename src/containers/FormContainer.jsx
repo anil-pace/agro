@@ -27,7 +27,6 @@ class FormContainer extends Component {
     this.handleFullName = this.handleFullName.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
-    this.handleCheckBox = this.handleCheckBox.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleGenderChange = this.handleGenderChange.bind(this);
   }
@@ -187,23 +186,6 @@ class FormContainer extends Component {
       }),
       () => console.log(this.state.newUser)
     );
-  }
-
-  handleCheckBox(e) {
-    const newSelection = e.target.value;
-    let newSelectionArray;
-
-    if (this.state.newUser.skills.indexOf(newSelection) > -1) {
-      newSelectionArray = this.state.newUser.skills.filter(
-        s => s !== newSelection
-      );
-    } else {
-      newSelectionArray = [...this.state.newUser.skills, newSelection];
-    }
-
-    this.setState(prevState => ({
-      newUser: { ...prevState.newUser, skills: newSelectionArray }
-    }));
   }
 
   handleFormSubmit(e) {
